@@ -1,0 +1,56 @@
+<html>
+ <head>
+  <meta charset="UTF-8" />
+  <title>Comunidades autonomas</title>
+  <script>
+    function recuperaContrasenia() {
+        // se genera la query_string
+        var datos = 'com=' + document.getElementById("com").value;
+        var xmlhttp;  // objeto XMLHttpRequest
+        if (window.XMLHttpRequest) {  // para IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {  // para IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+	        // si el resultado está listo (readyState==4) y la respuesta es correcta (status==200)
+	        if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+	            var respuesta = xmlhttp.responseText;
+	            document.getElementById("clave").innerHTML = respuesta;
+	        }
+	    }
+    xmlhttp.open("GET","ComAuto?" + datos ,true);  // crea la conexión con parámetros: método, url, asíncrono?
+    xmlhttp.setRequestHeader("X-Requested-With", "xmlhttprequest");  // establece la cabecera HTTP necesaria
+    xmlhttp.send();  // lanza la solicitud
+    }
+  </script>
+ </head>
+ <body onload="recuperaContrasenia()">
+  <h1>Comunidades y provincias</h1>
+  <form name="f1" id="f1">
+    Comunidad <br>
+    <select name="com" id="com" onchange="recuperaContrasenia()">
+    	<option value="Andalucia" selected>Andalucia</option>
+    	<option value="Galicia">Galicia</option>
+    	<option value="Asturias">Asturias</option>
+    	<option value="Cantabria">Cantabria</option>
+    	<option value="Pais Vasco">Pais Vasco</option>
+    	<option value="La Rioja">La Rioja</option>
+    	<option value="Aragon">Aragon</option>
+    	<option value="Cataluña">Cataluña</option>
+    	<option value="Castilla y Leon">Castilla y Leon</option>
+    	<option value="Madrid">Madrid</option>
+    	<option value="Castilla la Mancha">Castilla la Mancha</option>
+    	<option value="Comunidad Valenciana">Comunidad Valenciana</option>
+    	<option value="Extremadura">Extremadura</option>
+    	<option value="Murcia">Murcia</option>
+    	<option value="Melilla">Melilla</option>
+    	<option value="Islas Baleares">Islas Baleares</option>
+    	<option value="Islas Canarias">Islas Canarias</option>
+    </select><br>
+    Provincia
+    	<div id="clave">
+    	</div>
+  </form>
+ </body>
+</html>
